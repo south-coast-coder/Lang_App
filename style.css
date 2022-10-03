@@ -4,3 +4,6 @@ body{
 ul{
 	display: inline;
 }
+ul li{
+	display: inline;
+}
