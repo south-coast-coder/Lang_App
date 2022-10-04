@@ -1,23 +1,64 @@
 :root {
   --main-bg-color: white;
+  --nav-bg-color: #565656;
   --main-border-box: 3px solid blue;
+  --main-txt-type: Roboto;
 }
 
 body{
 	margin: 0;
 	background-color: var(--main-bg-color);
+	font-family: var(--main-txt-type);
 }
+.nav{
+	
+	width: 100%;
+	background-color: var(--nav-bg-color);
+	display: flex;
+	
+	}
 ul{
-	display: inline;
+	height: 70px;
+	width: 100%;
+	display: flex;
+	
 }
 ul li{
 	display: inline;
 	margin-right: 30%;
+
+}
+#title{
+	padding-bottom: 50%;
 }
 #hero{
 	width: 100%;
-	height: 20%;
-  border: var(--main-border-box);
+	height: 200px;
 	text-align: center;
+	background-image: url("coding.jpeg"); background-repeat: no-repeat;
+  background-size: cover;
 
+}
+.blog{
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-top: 20px;
+	height: 100px;
+	width: 96%;
+
+
+}
+#blog-cont{
+	display: flex;
+	width: 100%;
+	margin-bottom: 20px;
+}
+.blog-box{
+	display: inline;
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 30%;
+	margin-top: 20px;
+	height: 100px;
+	
 }
