@@ -1,10 +1,23 @@
+:root {
+  --main-bg-color: white;
+  --main-border-box: 3px solid blue;
+}
+
 body{
 	margin: 0;
-	background: blue;
+	background-color: var(--main-bg-color);
 }
 ul{
 	display: inline;
 }
 ul li{
 	display: inline;
+	margin-right: 30%;
+}
+#hero{
+	width: 100%;
+	height: 20%;
+  border: var(--main-border-box);
+	text-align: center;
+
 }
