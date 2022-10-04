@@ -2,7 +2,7 @@
   --main-bg-color: white;
   --nav-bg-color: #565656;
   --main-border-box: 3px solid blue;
-  --main-txt-type: Roboto;
+  --main-txt-type: Roboto 10px;
 }
 
 body{
@@ -10,15 +10,19 @@ body{
 	background-color: var(--main-bg-color);
 	font-family: var(--main-txt-type);
 }
+.icon{
+	height: 5vw;
+	width: 5w;
+}
 .nav{
-	
+	font-size: 20px;
 	width: 100%;
 	background-color: var(--nav-bg-color);
 	display: flex;
 	
 	}
 ul{
-	height: 70px;
+	height: 50px;
 	width: 100%;
 	display: flex;
 	
@@ -33,18 +37,40 @@ ul li{
 }
 #hero{
 	width: 100%;
-	height: 200px;
+	height: 100%;
 	text-align: center;
 	background-image: url("coding.jpeg"); background-repeat: no-repeat;
   background-size: cover;
+  height: 300px;
 
 }
 .blog{
 	margin-right: 2%;
-	margin-left: 2%;
-	margin-top: 20px;
+	margin-left: 9%;
+	margin-top: 40px;
 	height: 100px;
 	width: 96%;
+	display: flex;
+
+
+
+}
+.blog-img{
+  float: left;
+  width: 10vw;
+  height: 70%;
+ 
+}
+.blog-img img{
+	height: 10vw;
+	vertical-align: top;
+	
+}
+.blog-txt{
+  width: 70%;
+  padding-left: 2vw;
+  position: relative;
+  bottom: -30px;
 
 
 }
@@ -61,4 +87,30 @@ ul li{
 	margin-top: 20px;
 	height: 100px;
 	
+}
+.blog{
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-top: 90px;
+	height: 100px;
+	width: 96%;
+	
+
+
+}
+.about{
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-top: 90px;
+	height: 100px;
+	width: 96%;
+
+}
+.contact{
+width: 100%;
+	background-color: var(--nav-bg-color);
+	display: flex;
+}
+.icon:hover{
+	opacity: .5;
 }
