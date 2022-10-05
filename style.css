@@ -57,20 +57,24 @@ ul li{
 }
 .blog-img{
   float: left;
-  width: 10vw;
-  height: 70%;
+  width: 7vw;
+  height: 7vw;
+  
+
+
  
 }
 .blog-img img{
 	height: 10vw;
+	width: 10vw;
 	vertical-align: top;
+	border-radius: 50%;
 	
 }
 .blog-txt{
   width: 70%;
-  padding-left: 2vw;
-  position: relative;
-  bottom: -30px;
+  padding-left: 10vw;
+  
 
 
 }
@@ -78,6 +82,7 @@ ul li{
 	display: flex;
 	width: 100%;
 	margin-bottom: 20px;
+	margin-top: 40px;
 }
 .blog-box{
 	display: inline;
@@ -111,6 +116,9 @@ width: 100%;
 	background-color: var(--nav-bg-color);
 	display: flex;
 }
-.icon:hover{
+#title:hover{
 	opacity: .5;
+}
+.icon:hover{
+	opacity: 5;
 }
