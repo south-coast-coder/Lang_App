@@ -2,13 +2,17 @@
   --main-bg-color: white;
   --nav-bg-color: #565656;
   --main-border-box: 3px solid blue;
-  --main-txt-type: Roboto 10px;
+  --main-txt-type: "Roboto";
+  --main-txt-size: 15px;
+  --smaller-txt-size: 10px;
+  --smallest-txt-size: 9px;
 }
 
 body{
 	margin: 0;
 	background-color: var(--main-bg-color);
 	font-family: var(--main-txt-type);
+	font-size: var(--main-txt-size);
 }
 .icon{
 	height: 5vw;
@@ -122,3 +126,12 @@ width: 100%;
 .icon:hover{
 	opacity: 5;
 }
+.blog-box{
+	opacity: 5;
+}
+@media (min-width:320px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
+@media (min-width:480px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, Android phones, landscape iPhone */ }
+@media (min-width:600px)  { body{ font-size:var(--smaller-txt-size)} /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { body{font-size: var(--main-txt-size)}/* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
