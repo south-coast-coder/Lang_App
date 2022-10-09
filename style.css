@@ -1,3 +1,5 @@
+/*CSS variables */
+
 :root {
   --main-bg-color: white;
   --nav-bg-color: #565656;
@@ -8,8 +10,41 @@
   --smallest-txt-size: 9px;
 }
 
+/* CSS RESET */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+html{
+	padding: 0;
+	margin: 0;
+}
+
+/* Site Styles */
+
 body{
 	margin: 0;
+	padding: 0;
 	background-color: var(--main-bg-color);
 	font-family: var(--main-txt-type);
 	font-size: var(--main-txt-size);
@@ -23,6 +58,8 @@ body{
 	width: 100%;
 	background-color: var(--nav-bg-color);
 	display: flex;
+	padding-right: 10px;
+
 	
 	}
 ul{
@@ -37,7 +74,9 @@ ul li{
 
 }
 #title{
-	padding-bottom: 50%;
+	padding-bottom: 10%;
+	margin-left: 5vw;
+	padding-top: 1vw;
 }
 #hero{
 	width: 100%;
@@ -97,6 +136,10 @@ ul li{
 	height: 120px;
 	
 }
+.placeholder{
+	width:100%; 
+	height:100%;
+}
 .blog{
 	margin-right: 2%;
 	margin-left: 2%;
@@ -119,16 +162,23 @@ ul li{
 width: 100%;
 	background-color: var(--nav-bg-color);
 	display: flex;
+	height: 6vw;
 }
+
+/* Effects */
+
 #title:hover{
 	opacity: .5;
 }
 .icon:hover{
-	opacity: 5;
+	opacity: .5;
 }
-.blog-box: hover{
-	display: none;
+.placeholder:hover{
+	opacity: .5;
 }
+
+/* Responsive Rules */
+
 @media (min-width:320px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
 @media (min-width:480px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, Android phones, landscape iPhone */ }
 @media (min-width:600px)  { body{ font-size:var(--smaller-txt-size)} /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
