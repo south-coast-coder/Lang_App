@@ -8,7 +8,7 @@
   --main-txt-size: 15px;
   --larger-txt-size: 20px;
   --smaller-txt-size: 15px;
-  --smallest-txt-size: 7px;
+  --smallest-txt-size: 10px;
 }
 
 /* CSS RESET */
@@ -72,6 +72,7 @@ ul{
 ul li{
 	display: inline;
 	margin-right: 30%;
+	font-size: var(--larger-txt-size);
 
 }
 #title{
@@ -190,6 +191,6 @@ width: 100%;
 
 /* Responsive Rules */
 /* @media screen and (min-width:800px)  {body{font-size: var(--main-txt-size)} */
-@media screen and (min-width: 300px) and (max-width: 599px){body{background-color: blue}}
-@media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: black}}
+@media screen and (min-width: 300px) and (max-width: 599px){body{background-color: blue} .nav{height: 25px;} ul li{font-size: var(--smallest-txt-size)}}
+@media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: black}.nav{height: 35px;}ul li{font-size: var(--smaller-txt-size)}}
 
