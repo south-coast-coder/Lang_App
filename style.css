@@ -189,5 +189,7 @@ width: 100%;
 }
 
 /* Responsive Rules */
-@media only screen (min-width:800px)  {body{font-size: var(--main-txt-size)}
+/* @media screen and (min-width:800px)  {body{font-size: var(--main-txt-size)} */
+@media screen and (min-width: 300px) and (max-width: 599px){body{background-color: blue}}
+@media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: black}}
 
