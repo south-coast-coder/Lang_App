@@ -6,8 +6,9 @@
   --main-border-box: 3px solid blue;
   --main-txt-type: "Roboto";
   --main-txt-size: 15px;
-  --smaller-txt-size: 10px;
-  --smallest-txt-size: 9px;
+  --larger-txt-size: 20px;
+  --smaller-txt-size: 15px;
+  --smallest-txt-size: 7px;
 }
 
 /* CSS RESET */
@@ -54,7 +55,7 @@ body{
 	width: 5w;
 }
 .nav{
-	font-size: 20px;
+	
 	width: 100%;
 	background-color: var(--nav-bg-color);
 	display: flex;
@@ -63,7 +64,7 @@ body{
 	
 	}
 ul{
-	height: 50px;
+	
 	width: 100%;
 	display: flex;
 	
@@ -138,11 +139,10 @@ ul li{
 	width: 30%;
 	margin-top: 20px;
 	height: 120px;
+	overflow: hidden;
 	
 }
-#blog1title{
-	display: none;
-}
+
 .placeholder{
 	width:100%; 
 	height:100%;
@@ -163,6 +163,7 @@ ul li{
 	margin-top: 90px;
 	height: 100px;
 	width: 96%;
+	margin-bottom: 10px;
 
 }
 .contact{
@@ -183,15 +184,10 @@ width: 100%;
 .placeholder:hover{
 	opacity: .5;
 }
-.placeholder2:hover{
-	opactiy: .1;
+.placeholder2:hover > #blog1title{
+	opacity: .1;
 }
 
 /* Responsive Rules */
+@media only screen (min-width:800px)  {body{font-size: var(--main-txt-size)}
 
-@media (min-width:320px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
-@media (min-width:480px)  { body{font-size: var(--smallest-txt-size)}/* smartphones, Android phones, landscape iPhone */ }
-@media (min-width:600px)  { body{ font-size:var(--smaller-txt-size)} /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
-@media (min-width:801px)  { body{font-size: var(--main-txt-size)}/* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ }
