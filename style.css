@@ -5,10 +5,10 @@
   --nav-bg-color: #565656;
   --main-border-box: 3px solid blue;
   --main-txt-type: "Roboto";
-  --main-txt-size: 15px;
+  --main-txt-size: 22px;
   --larger-txt-size: 20px;
-  --smaller-txt-size: 15px;
-  --smallest-txt-size: 10px;
+  --smaller-txt-size: 18px;
+  --smallest-txt-size: 11px;
 }
 
 /* CSS RESET */
@@ -131,7 +131,7 @@ ul li{
 	display: flex;
 	width: 100%;
 	margin-bottom: 20px;
-	margin-top: 40px;
+	margin-top: 90px;
 }
 .blog-box{
 	display: inline;
@@ -167,6 +167,29 @@ ul li{
 	margin-bottom: 10px;
 
 }
+.about2{
+	display: flex; 
+	flex-wrap: wrap;
+	margin-bottom:6vw;
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-top: 90px;
+	height: 100px;
+	width: 96%;
+	
+}
+#half{
+	width: 50%;
+	height: 100px;
+}
+#skills{
+	margin-left:20p;
+	display: inline;
+	list-style-type: circle;
+}
+#skills li{
+	display:list-item;
+}
 .contact{
 width: 100%;
 	background-color: var(--nav-bg-color);
@@ -191,6 +214,7 @@ width: 100%;
 
 /* Responsive Rules */
 /* @media screen and (min-width:800px)  {body{font-size: var(--main-txt-size)} */
-@media screen and (min-width: 300px) and (max-width: 599px){body{background-color: blue} .nav{height: 25px;} ul li{font-size: var(--smallest-txt-size)}}
-@media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: black}.nav{height: 35px;}ul li{font-size: var(--smaller-txt-size)}}
-
+@media screen and (min-width: 1200px){.blog-box{height: 180px;}}
+@media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: green; font-size: var(--smaller-txt-size)}.nav{height: 35px;}ul li{font-size: var(--smaller-txt-size)}.blog-img{width: 100px;} .blog-img img{height: 100px;width: 100px} #blog-cont{margin-top: 100px;}}
+@media screen and (min-width: 350px) and (max-width: 599px){body{background-color: blue; font-size: var(--smallest-txt-size)} .nav{height: 25px;}.blog-img {width: 100px;} .blog-img img{height: 100px;width: 100px}; #blog-cont {margin-top:20vw;} ul li{font-size: var(--smallest-txt-size)}#half{flex: 0 0 100%;} #half h1 {text-align: center;} .about2{height: 200px;}}
+@media screen and (max-width: 349px) and (min-width: 0px){body{background-color: red; font-size: var(--smallest-txt-size)} .blog-img{width: 100px;} .blog-img img{height: 100px;width: 100px};#blog-cont{margin-top: 30vw;}ul li{font-size: var(--smallest-txt-size)}.about2{margin-top: 20px;}}

@@ -33,9 +33,9 @@
     <!-- Navbar-->
     <div class="nav">
     <ul>
-      <li> <p id="title">Home</p></li>
+      <li> <p id="title"><a href="#me" style="text-decoration: none; color:black">Blog</p></li>
       <li><p id="title"><a href="#about" style="text-decoration: none; color:black">Skills</a></p></li>
-      <li><p id="title">About</p></li>
+      <li><p id="title"><a href="#about2" style="text-decoration: none; color:black">About</p></li>
     </ul>
     <img rel="git"> 
   </div>
@@ -43,7 +43,8 @@
     <!-- Hero Banner -->
     <div id ="hero" ></div>
     <!-- Blog-->
-    <div class="blog"><div class="blog-img"><img src="me.jpeg"> </div><div class="blog-txt"> <h1 style="text-align: center;"> Charlie Jarman Aspiring Developer/Tester </h1 >Hi, my name is Charlie and I am currently learning how () click on the images below to read about the latest subjects I am learning!</div> </div>
+    <div class="blog"><div class="blog-img"><img src="me.jpeg" > </div><div class="blog-txt"> <h1 style="text-align: center;"> <p>Charlie Jarman Aspiring Developer/Tester </h1 >Hi, my name is Charlie and I am currently learning how () click on the images below to read about the latest subjects I am learning!</p></div> <span id="me" style="position:relative;top:-10px;"></span><!-- this span is where link scrolls to  - used to adjust the position scrolled to so looks better, good trick ---> </div>
+    
 
     <!--(Contains update on latest thing learnt)-->
     <!-- TO DO - write simple JS that takes text (hidden) associated with blog images below (over which superimpose title) and replaced main blog/image with it if clicked -->
@@ -59,9 +60,19 @@
      <div class="about"> <div id="about"><h1>HTML/CSS </h1> At the moment I am brushing up on my html and css skills so I understand how modern websites are built at least on a basic level</div></div>
 
     <!--(Introduce blog/purpose and what are trying to learn - i.e scripting, automation)-->
-    <div class="about2" style="display: flex; margin-bottom:6vw;">
-      <div id="half" style="width:50%">  <h1 style="padding-left: 50%; margin-bottom:20px;"> About </h1><p>I am a ...</p></div>
-     <div id="half" style="width:50%; float:left;"> <h1 style="margin-bottom:20px;"> Skills </h1><ul style="margin-left:20px; display: inline;"><li style="display:block"> Github </li> <li style="display:block"> JS </li> <li style="display:block"> Html/Csss </li>   </ul></div></div>
+    <div class="about2" id="about2" >
+        <div id="half" >
+           <h1 style="margin-bottom:20px;"> About </h1><p>I am a ...</p>
+         </div>
+       <div id="half"> 
+        <h1 style="margin-bottom:20px;"> Skills </h1>
+        <ul id="skills">
+          <li> Github </li> 
+          <li> JS </li>
+           <li> Html/Csss </li>   
+        </ul>
+      </div>
+    </div>
    
      <!--Scroll to Top-->
 
