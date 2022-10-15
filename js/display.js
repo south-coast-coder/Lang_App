@@ -9,6 +9,9 @@ else if (number==2){
 else if (number==3){
 	document.getElementById("about").innerHTML = "<h1> Javascript </h1> I am learning Javascript by adding scripts to this page, I have linked to a JS file that allows the content of this box to be updated when the user clicks on one of the images above."
 }
+else if (number ==4){
+	document.getElementById("about").innerHTML = "<h1> Python </h1> Test"
+}
 else{
 	console.log("neither")
 }
