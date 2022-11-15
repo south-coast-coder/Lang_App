@@ -10,7 +10,7 @@ else if (number==3){
 	document.getElementById("about").innerHTML = "<h1> Javascript </h1> I am learning Javascript by adding scripts to this page, I have linked to a JS file that allows the content of this box to be updated when the user clicks on one of the images above."
 }
 else if (number ==4){
-	document.getElementById("about").innerHTML = "<h1> Python </h1> Test"
+	document.getElementById("about").innerHTML = "<h1>Chess</h1> I am improving my Javascript files by building a chess game which I will host on Github Pages... <br> <a href='https://github.com/south-coast-coder/chess-game'>Repository Here</a>   <a href='https://south-coast-coder.github.io/chess-game-2/'>Link here</a>"
 }
 else{
 	console.log("neither")
