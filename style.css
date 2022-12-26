@@ -187,6 +187,9 @@ ul li{
 	height: 100px;
 	margin-left: 5vw;
 }
+.info{
+	margin-bottom:20px;
+}
 #skills{
 	margin-left:10vw;
 	display: inline;
@@ -227,5 +230,5 @@ width: 100%;
 /* @media screen and (min-width:800px)  {body{font-size: var(--main-txt-size)} */
 @media screen and (min-width: 1200px){.blog-box{height: 180px;}}
 @media screen and (min-width: 600px) and (max-width: 1200px){body {background-color: green; font-size: var(--smaller-txt-size)}.nav{height: 35px;}ul li{font-size: var(--smaller-txt-size)}.blog-img{width: 100px;} .blog-img img{height: 100px;width: 100px} #blog-cont{margin-top: 100px;}}
-@media screen and (min-width: 350px) and (max-width: 599px){body{background-color: blue; font-size: var(--smallest-txt-size)} .nav{height: 25px;}.blog-img {width: 100px;} .blog-img img{height: 100px;width: 100px}; #blog-cont {margin-top:20vw;} ul li{font-size: var(--smallest-txt-size)}#half{flex: 0 0 100%;} #half h1 {text-align: center;} .about2{height: 200px;}#half2{text-align: center; width: 100%;} }
-@media screen and (max-width: 349px) and (min-width: 0px){body{background-color: red; font-size: var(--smallest-txt-size)} .blog-img{width: 100px;} .blog-img img{height: 100px;width: 100px};#blog-cont{margin-top: 30vw;}ul li{font-size: var(--smallest-txt-size)}.about2{margin-top: 20px;}}
+@media screen and (min-width: 350px) and (max-width: 599px){body{background-color: blue; font-size: var(--smallest-txt-size)} .nav{height: 25px;}.blog-img {width: 100px;} .blog-img img{height: 100px;width: 100px}; #blog-cont {margin-top:20vw;} ul li{font-size: var(--smallest-txt-size)}#half{flex: 0 0 100%;} #half h1 {text-align: center;} .about2{height: 200px;}#half2{text-align: center; width: 100%;} .info{padding-right: 10px;}}
+@media screen and (max-width: 349px) and (min-width: 0px){body{background-color: red; font-size: var(--smallest-txt-size)} .blog-img{width: 100px;} .blog-img img{height: 100px;width: 100px};#blog-cont{margin-top: 30vw;}ul li{font-size: var(--smallest-txt-size)}.about2{margin-top: 20px;}.info{padding-right: 10px;}}
