@@ -3,7 +3,7 @@ function display(number)
 if(number==1){
 	setTimeout(function(){
 document.getElementById("about").innerHTML = " <h1>HTML/CSS </h1>At the moment I am brushing up on my html and css skills so I understand how modern websites are built at least on a basic level"
-},0)
+},2)
 }
 else if (number==2){
 	
