@@ -1,14 +1,14 @@
 function display(number)
 {console.log("test")
 if(number==1){
-document.getElementById("me").scrollIntoView()
+
 document.getElementById("about").innerHTML = " <h1>HTML/CSS </h1>At the moment I am brushing up on my html and css skills so I understand how modern websites are built at least on a basic level"
-document.getElementById("me").scrollIntoView()
+document.getElementById("me").scrollIntoView({behavior: "smooth"})
 }
 else if (number==2){
 	document.getElementById("me").scrollIntoView()
 	document.getElementById("about").innerHTML = "<h1>Github </h1>I have created a repository on github and am uploading changes to it from my computer in order to learn the key commands and the general workflow of version control"
-    document.getElementById("me").scrollIntoView()
+    document.getElementById("me").scrollIntoView({behavior: "smooth"})
 }
 
 else if (number==3){
