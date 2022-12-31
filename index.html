@@ -43,16 +43,16 @@
     <!-- Hero Banner -->
     <div id ="hero" ></div>
     <!-- Blog-->
-    <div class="blog"><div class="blog-img"><img src="me.jpeg" > </div><div class="blog-txt"> <h1 style="text-align: center;"> <p>Charlie Jarman Aspiring Developer/Tester </h1 >Hi, my name is Charlie and I am currently learning how () click on the images below to read about the latest subjects I am learning!</p></div> <span id="me" style="position:relative;top:-10px;"></span><!-- this span is where link scrolls to  - used to adjust the position scrolled to so looks better, good trick ---> </div>
+    <div class="blog"><div class="blog-img"><img src="me.jpeg" > </div><div class="blog-txt"> <h1 style="text-align: center;"> <p>Charlie Jarman Aspiring Developer/Tester </h1 >Hi, my name is Charlie and I am currently teaching myself a variety of programming skills in order to pursue a career in the field. Click on the images below to read about the latest subjects I am learning!</p></div> <span id="me" style="position:relative;top:-10px;"></span><!-- this span is where link scrolls to  - used to adjust the position scrolled to so looks better, good trick ---> </div>
     
 
     <!--(Contains update on latest thing learnt)-->
     <!-- TO DO - write simple JS that takes text (hidden) associated with blog images below (over which superimpose title) and replaced main blog/image with it if clicked -->
     <div id="blog-cont">
-    <img src="forward.png" style="width:2vw;height:2vw;margin-top:7vw;" class="rotateimg180" onclick="transform(1)">
-    <div class ="blog-box"><img src="html.jpeg" class="placeholder" onclick="display(1)">></div>
+    <img src="forward.png" style="width:2vw;height:2vw;margin-top:7vw;" class="rotateimg180" onclick="transform(1);return false">
+    <div class ="blog-box"><img src="html.jpeg" class="placeholder" onclick="display(1) return false">></div>
     <div class ="blog-box"> <img src="images/Git-session.png" class="placeholder" onclick="display(2)"> <div id="blog1title">Github</div></div>
-    <div class ="blog-box"><img src="js.png" class="placeholder" onclick="display(3)"></div>
+    <div class ="blog-box"><img src="js.png" class="placeholder" onclick="display(3) return false"></div>
     <img src="forward.png" style="width:2vw;height:2vw;margin-top:7vw;">
   </div>
 
