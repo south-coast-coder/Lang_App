@@ -10,7 +10,7 @@ function transform(number){
 }
 else if (number ==2){ 
 	console.log("TWO")
-	document.getElementById("blog-cont").innerHTML =`<img src=\"forward.png\"style=\"width:2vw;height:2vw;margin-top:7vw;\" class=\"rotateimg180\"onclick=\"transform(1)\"></div>
+	document.getElementById("blog-cont").innerHTML =`<img src=\"forward.png\"style=\"width:2vw;height:2vw;margin-top:7vw;\" class=\"rotateimg180\"onclick=\"transform(1);return false\"></div>
     <div class =\"blog-box\"><img src=\"html.jpeg\" class=\"placeholder\" onclick=\"display(1)\">></div>
     <div class =\"blog-box\"> <img src=\"images/Git-session.png\" class=\"placeholder\" onclick=\"display(2);return false\"> <div id=\"blog1title\">Github</div></div>
    <div class =\"blog-box\"><img src=\"js.png\" class=\"placeholder\" onclick=\"display(3); return false\"></div>
