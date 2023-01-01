@@ -17,7 +17,7 @@ else if (number==3){
 }
 else if (number ==4){
 	document.getElementById("about").innerHTML = "<h1>Chess</h1> I am improving my Javascript files by building a chess game which I will host on Github Pages... <br> <a href='https://github.com/south-coast-coder/chess-game-2'>Repository Here</a>   <a href='https://south-coast-coder.github.io/chess-game-2/'>Link here</a>"
-    document.getElementById("me").scrollIntoView()
+    document.getElementById("me").scrollIntoView({behavior: "auto"})
 }
 else{
 	console.log("neither")
