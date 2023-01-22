@@ -59,7 +59,7 @@ page_marker=None
 use_page="0"
 
 app = wx.PySimpleApp()
-items=["won","two","tree","b","a","b","a","b","a","b","a","b","a","b","a","b","c","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b"]
+
 frame1=wx.Frame(None, -1, size=(1000,400))
 
 bitmap = wx.Bitmap('loading.png')
@@ -86,6 +86,7 @@ def OnClickButton(e):
         global use_page
         global page_marker
         use=e.GetId()
+        print("use_page="+str(use_page))
         
         
         
@@ -99,8 +100,8 @@ def OnClickButton(e):
             print("usepage" + use_page)
             
             if use_page=="0":
-                page_marker=words[0:1000]
-                use_page="1000"
+                page_marker=words[1000:2000]
+                use_page="2000"
             else:
                 use_int=int(use_page)
                 page_marker=words[use_int:(use_int+1000)]
@@ -110,7 +111,7 @@ def OnClickButton(e):
             for item in page_marker:
               html.AppendToPage( "<a href="+item+"> "+item+" </a>")
         if use==1:
-            if use_page=="0":
+            if (use_page=="0") or (use_page=="1000"):
                 print("cant go back at beggining")
                 return
             else:
@@ -162,24 +163,11 @@ html.SetPage(
 
 
 
-"<a href="+dog+"\">"+dog+"</a> <a href=\"wizard\">wizard</a>.")
+)
 for item in ten:
        html.AppendToPage(
             "<a href="+item+"> "+item+" </a>"
             )
-for item in items:
-    if(start==20):
-         html.AppendToPage("<br></br> <br></br>")
-        
-         print("fourth")
-         start=0
-    else:
-        html.AppendToPage(
-            "<a href="+item+"> "+item+" </a>"
-
-
-            )
-        start+=1
 
 
 
