@@ -55,8 +55,8 @@ print("last thou"+str(max_thous)) # if here then check when forward button click
 ten=words[0:1000] # this is extracting words for current page
 twenty=words[1000:2000]
 # print("ten ----- \n"+str(ten))
-page_marker=twenty
-use_page="twenty"
+page_marker=None
+use_page="0"
 
 app = wx.PySimpleApp()
 items=["won","two","tree","b","a","b","a","b","a","b","a","b","a","b","a","b","c","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b","b","a","b"]
@@ -78,27 +78,53 @@ panel=wx.Panel(frame1, size=(400,400),pos=(0,250))
 
 
         
-btn=wx.Button(panel,label="too", size=(100,100), pos=(60,0))
+btn=wx.Button(panel,id=1,label="previous", size=(100,100), pos=(60,0))
 text1=wx.TextCtrl(panel,1000,value="text", size=(150,20))
-btn2=wx.Button(panel,label="too", size=(100,100), pos=(60,53))
+btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(60,53))
 def OnClickButton(e):
 
-
-
-           
-        html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
         global use_page
         global page_marker
-        print("usepage" + use_page)
-        if use_page=="twenty":
-            page_marker=ten 
-            use_page="ten"
-        else:
-            page_marker=twenty
-            use_page="twenty"
+        use=e.GetId()
+        
+        
+        
+        
+        if use==2:  
+            if use_page==str(max_thous):
+                    print("max thousand reached")
+                    return
+            html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
+            
+            print("usepage" + use_page)
+            
+            if use_page=="0":
+                page_marker=words[0:1000]
+                use_page="1000"
+            else:
+                use_int=int(use_page)
+                page_marker=words[use_int:(use_int+1000)]
+                
+                use_page=str(use_int+1000)
+               
+            for item in page_marker:
+              html.AppendToPage( "<a href="+item+"> "+item+" </a>")
+        if use==1:
+            if use_page=="0":
+                print("cant go back at beggining")
+                return
+            else:
+                html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
+                use_int=int(use_page)
+                page_marker=words[(use_int-2000):(use_int-1000)]
+                if use_page=="0":
+                    print("already at beggining")
+                    return
+                use_page=str(use_int-1000)
+           
+            for item in page_marker:
+              html.AppendToPage( "<a href="+item+"> "+item+" </a>")
 
-        for item in page_marker:
-          html.AppendToPage( "<a href="+item+"> "+item+" </a>")
 
         
         
@@ -108,6 +134,7 @@ def OnClickButton(e):
                
           
 btn2.Bind(wx.EVT_BUTTON,OnClickButton)
+btn.Bind(wx.EVT_BUTTON,OnClickButton)
 
 
 html = wx.html.HtmlWindow(frame1, size=(1000,250))
@@ -168,6 +195,7 @@ for item in items:
 
 def OnClickWord(e):
                         use=e.GetEventObject()
+
                         print("clicked word")
                         global current_word
 
