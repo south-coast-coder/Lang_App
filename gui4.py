@@ -30,9 +30,9 @@ def checkFreq():
     for key, value in wordslist.items():
                             print(key)
                             print(value.times)
-
-
-usefile="rus_3.pdf"
+pronun=None
+word=None
+usefile="rus_long.pdf"
 use_pdf(usefile)
 current_word="test"
 file=open("new.txt","r")
@@ -73,13 +73,16 @@ wx.Yield()
 
 
 
-panel=wx.Panel(frame1, size=(400,400),pos=(0,250))
+panel=wx.Panel(frame1, size=(500,400),pos=(0,250))
 
 
 
         
 btn=wx.Button(panel,id=1,label="previous", size=(100,100), pos=(60,0))
 text1=wx.TextCtrl(panel,1000,value="text", size=(150,20))
+text2=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(400,0))
+text3=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(190,0))
+btn3=wx.Button(panel,label="store", size=(150,20), pos=(200,50))
 btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(60,53))
 def OnClickButton(e):
 
@@ -133,9 +136,20 @@ def OnClickButton(e):
               
         
                
-          
+btn.Bind(wx.EVT_BUTTON,OnClickButton)         
 btn2.Bind(wx.EVT_BUTTON,OnClickButton)
-btn.Bind(wx.EVT_BUTTON,OnClickButton)
+def Store(self):
+    global word
+    global current_word
+    global pronun
+    print(word)
+    print(pronun)
+    print(current_word)
+    file=open("stored.txt","a")
+    file.write(word+" "+pronun+" "+current_word+"\n")
+    file.close()
+btn3.Bind(wx.EVT_BUTTON,Store)
+
 
 
 html = wx.html.HtmlWindow(frame1, size=(1000,250))
@@ -186,7 +200,8 @@ def OnClickWord(e):
 
                         print("clicked word")
                         global current_word
-
+                        global word
+                        global pronun
                         print ("You Clicked:",e.GetLinkInfo().GetHref())
                         print(e.GetLinkInfo())
                         print(e.GetLinkInfo().GetEvent())
@@ -194,8 +209,10 @@ def OnClickWord(e):
                         current_word=useText
                         print(current_word)
                         print("current="+current_word)
-                        word=trans(current_word)
-                        text1.SetLabel(word)
+                        word, pronun=trans(current_word)
+                        text1.SetLabel(current_word.strip(","))
+                        text2.SetLabel(word.strip(","))
+                        text3.SetLabel(pronun.strip(","))
                         for key, value in wordslist.items():
                             if key==current_word:
                                 print("already listed")
@@ -204,6 +221,7 @@ def OnClickWord(e):
                                 return
                         Word(current_word,word)
                         checkFreq()
+
 
 
 

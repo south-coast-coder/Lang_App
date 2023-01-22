@@ -6,9 +6,13 @@ def trans(word):
     translator=Translator()
     
     
-    newtrans=translator.translate(word, src="en", dest="fr") 
+    newtrans=translator.translate(word, src="ru", dest="en") 
     print(newtrans)
-    return newtrans.text
+    print(newtrans.pronunciation)
+    translator2=Translator()
+    orig=translator2.translate(word,src="ru",dest="ru")
+    print(orig.pronunciation)
+    return newtrans.text, orig.pronunciation
     
 #IMPORTANT! After a certain amount of text the Google API locks your API out -
 # - if code is refusing to translate (usually throws JSON error) this is probably
