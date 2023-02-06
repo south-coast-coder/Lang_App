@@ -91,6 +91,14 @@ btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(200,0))
 text4=wx.TextCtrl(panel,1000,value="1", size=(150,20), pos=(250,100))
 btn4=wx.Button(panel,label="go", size=(150,20), pos=(0,100))
 control=wx.TextCtrl(frame1, style=wx.TE_MULTILINE, size=(500,500), pos=(1010,0))
+try:
+    f = open("1000.txt", "r")
+    data=f.read()
+    control.SetValue(data)
+
+except:
+    print("failed!")
+    pass
 
 def OnClickButton(e):
 
@@ -111,7 +119,7 @@ def OnClickButton(e):
             check_text2=str(int(use_page)+1000)
             print("text2 ....")
             print(check_text2)
-            with open(check_text+".txt","a") as file:
+            with open(check_text+".txt","w") as file:
                 file.write(translation)
             print("translation ....")
             print(translation)
@@ -151,12 +159,23 @@ def OnClickButton(e):
                 return
             else:
                 translation=control.GetValue()
-                print("translation ....")
-                print(translation)
+                check_text=str(int(use_page))
+                check_text2=str(int(use_page)-1000)
+                print("text2 ....")
+                print(check_text2)
+                with open(check_text+".txt","w") as file:
+                    file.write(translation)
                 control.SetValue("")
                 html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
                 use_int=int(use_page)
                 page_marker=words[(use_int-2000):(use_int-1000)]
+                try: 
+                    print("check_text2"+check_text2)
+                    f = open(check_text2+".txt", "r")
+                    data=f.read()
+                    control.SetValue(data)
+                except:
+                    pass
                 if use_page=="1000" or use_page=="0":
                     print("already at beggining")
                     return
