@@ -91,6 +91,7 @@ btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(200,0))
 text4=wx.TextCtrl(panel,1000,value="1", size=(150,20), pos=(250,100))
 btn4=wx.Button(panel,label="go", size=(150,20), pos=(0,100))
 control=wx.TextCtrl(frame1, style=wx.TE_MULTILINE, size=(500,500), pos=(1010,0))
+
 def OnClickButton(e):
 
         global use_page
@@ -106,13 +107,28 @@ def OnClickButton(e):
                     print("max thousand reached")
                     return
             translation=control.GetValue()
+            check_text=str(int(use_page))
+            check_text2=str(int(use_page)+1000)
+            print("text2 ....")
+            print(check_text2)
+            with open(check_text+".txt","a") as file:
+                file.write(translation)
             print("translation ....")
             print(translation)
+           
+            
+            
             control.SetValue("")
             html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
             
-            print("usepage" + use_page)
-            
+            try: 
+                print("check_text2"+check_text2)
+                f = open(check_text2+".txt", "r")
+                data=f.read()
+                control.SetValue(data)
+            except:
+                pass
+             
             if use_page=="1000":
                 page_marker=words[1000:2000]
                 
@@ -284,6 +300,7 @@ def OnClickWord(e):
                         return current_word
 html.Bind(wx.html.EVT_HTML_LINK_CLICKED,OnClickWord)
 frame1.Show()  #this and below WERE at bottom
+
 
 app.MainLoop()
 
