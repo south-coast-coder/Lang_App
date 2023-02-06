@@ -1,17 +1,17 @@
 from googletrans import Translator
+
 def test():
     print("tested in translate.py")
 def trans(word):
-    print("word="+word)
+    
     translator=Translator()
     
     
-    newtrans=translator.translate(word, src="ru", dest="en") 
-    print(newtrans)
-    print(newtrans.pronunciation)
+    newtrans=translator.translate(word, src="uk", dest="en") 
+    
     translator2=Translator()
-    orig=translator2.translate(word,src="ru",dest="ru")
-    print(orig.pronunciation)
+    orig=translator2.translate(word,src="uk",dest="uk")
+   
     return newtrans.text, orig.pronunciation
     
 #IMPORTANT! After a certain amount of text the Google API locks your API out -
@@ -22,5 +22,5 @@ def trans(word):
 #wit dialogue and ask for format- tell it UTF - 8, python can handle this!
 
 
-    
+        
 

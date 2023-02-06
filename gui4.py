@@ -1,5 +1,7 @@
 import wx
 import wx.adv
+import smtplib
+from email.message import EmailMessage
 from translate import *
 from pdf_script import *
 
@@ -32,10 +34,11 @@ def checkFreq():
                             print(value.times)
 pronun=None
 word=None
-usefile="rus_long.pdf"
-use_pdf(usefile)
+print("!!!!!FITST !!!!!")
+#usefile="rus_long.pdf"
+#use_pdf(usefile)
 current_word="test"
-file=open("new.txt","r")
+file=open("judaism_without_embellishments.txt","r")
 data=file.read()   
 print('length file'+str(len(data)))
 words = data.split()
@@ -56,11 +59,12 @@ ten=words[0:1000] # this is extracting words for current page
 twenty=words[1000:2000]
 # print("ten ----- \n"+str(ten))
 page_marker=None
-use_page="0"
+use_page="1000"
 
 app = wx.PySimpleApp()
 
-frame1=wx.Frame(None, -1, size=(1000,400))
+frame1=wx.Frame(None, -1, size=(2000,800))
+
 
 bitmap = wx.Bitmap('loading.png')
 splash = wx.adv.SplashScreen(
@@ -73,17 +77,20 @@ wx.Yield()
 
 
 
-panel=wx.Panel(frame1, size=(500,400),pos=(0,250))
+panel=wx.Panel(frame1, size=(750,400),pos=(0,250))
 
 
 
-        
-btn=wx.Button(panel,id=1,label="previous", size=(100,100), pos=(60,0))
+
 text1=wx.TextCtrl(panel,1000,value="text", size=(150,20))
 text2=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(400,0))
 text3=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(190,0))
-btn3=wx.Button(panel,label="store", size=(150,20), pos=(200,50))
-btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(60,53))
+btn3=wx.Button(panel,label="store", size=(150,20), pos=(600,0))
+btn=wx.Button(panel,id=1,label="previous", size=(100,100), pos=(60,0))
+btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(200,0))
+text4=wx.TextCtrl(panel,1000,value="1", size=(150,20), pos=(250,100))
+btn4=wx.Button(panel,label="go", size=(150,20), pos=(0,100))
+control=wx.TextCtrl(frame1, style=wx.TE_MULTILINE, size=(500,500), pos=(1010,0))
 def OnClickButton(e):
 
         global use_page
@@ -98,36 +105,51 @@ def OnClickButton(e):
             if use_page==str(max_thous):
                     print("max thousand reached")
                     return
+            translation=control.GetValue()
+            print("translation ....")
+            print(translation)
+            control.SetValue("")
             html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
             
             print("usepage" + use_page)
             
-            if use_page=="0":
+            if use_page=="1000":
                 page_marker=words[1000:2000]
+                
                 use_page="2000"
             else:
+                print("Else!!!")
                 use_int=int(use_page)
                 page_marker=words[use_int:(use_int+1000)]
-                
+
+               
                 use_page=str(use_int+1000)
                
             for item in page_marker:
               html.AppendToPage( "<a href="+item+"> "+item+" </a>")
+            use_int=int((int(use_page))/1000)
+            text4.SetValue(str(use_int))
         if use==1:
-            if (use_page=="0") or (use_page=="1000"):
+            if (use_page=="1000") :
                 print("cant go back at beggining")
                 return
             else:
+                translation=control.GetValue()
+                print("translation ....")
+                print(translation)
+                control.SetValue("")
                 html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
                 use_int=int(use_page)
                 page_marker=words[(use_int-2000):(use_int-1000)]
-                if use_page=="0":
+                if use_page=="1000" or use_page=="0":
                     print("already at beggining")
                     return
                 use_page=str(use_int-1000)
            
             for item in page_marker:
               html.AppendToPage( "<a href="+item+"> "+item+" </a>")
+            use_int=int(int(use_page)/1000)
+            text4.SetValue(str(use_int))
 
 
         
@@ -138,6 +160,39 @@ def OnClickButton(e):
                
 btn.Bind(wx.EVT_BUTTON,OnClickButton)         
 btn2.Bind(wx.EVT_BUTTON,OnClickButton)
+def page_change(e):
+   global use_page
+   print("clicked!")
+   page_no=text4.GetValue()
+   page=(int(page_no)*1000)
+   print("page="+str(page))
+   if page not in pages_list:
+    print("invalid page no")
+    return
+   print(page_no)
+   print(page)
+   translation=control.GetValue()
+   print("translation ....")
+   print(translation)
+   print("page")
+   print(page)
+   control.SetValue("")
+   html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
+   use_int=page
+   page_marker=words[(use_int-1000):use_int]
+   
+   use_page=str(use_int+1000)
+
+   for item in page_marker:
+       html.AppendToPage( "<a href="+item+"> "+item+" </a>")
+   use_int=int(use_page)
+   print("use int -----")
+   print(use_int)
+   text4.SetValue(str(int((use_int-1000)/1000)))
+
+
+    
+btn4.Bind(wx.EVT_BUTTON,page_change)
 def Store(self):
     global word
     global current_word
@@ -148,6 +203,7 @@ def Store(self):
     file=open("stored.txt","a")
     file.write(word+" "+pronun+" "+current_word+"\n")
     file.close()
+    
 btn3.Bind(wx.EVT_BUTTON,Store)
 
 
@@ -228,6 +284,9 @@ def OnClickWord(e):
                         return current_word
 html.Bind(wx.html.EVT_HTML_LINK_CLICKED,OnClickWord)
 frame1.Show()  #this and below WERE at bottom
+
 app.MainLoop()
+
+#Add code that offers the option to send stored vocab on window close (ask for password rather than storing in the code)
 
 
