@@ -1,16 +1,34 @@
 import wx
 import wx.adv
 import smtplib
+import wx.html
+import json 
+
 from email.message import EmailMessage
 from translate import *
 from pdf_script import *
 
-import wx.html
 
 test()
 test2()
 
 wordslist={}
+
+# access projects so user can choose
+proj_list=[]
+with open('projects.json',"r") as file_object:  
+  data = json.load(file_object)  
+print( data["projects"])
+print(data["projects"][0])
+print(len(data["projects"]))
+for i in range (len(data["projects"])):
+    print(data["projects"][i]["name"])
+    proj_list.append(data["projects"][i]["name"])
+
+print(proj_list)
+
+
+
 
 
 
@@ -64,6 +82,7 @@ use_page="1000"
 app = wx.PySimpleApp()
 
 frame1=wx.Frame(None, -1, size=(2000,800))
+frame2=wx.Frame(None, -1, size=(2000,800))
 
 
 bitmap = wx.Bitmap('loading.png')
@@ -76,11 +95,19 @@ splash.Show()
 wx.Yield()
 
 
+panel2=wx.Panel(frame2, size=(750,400),pos=(0,600))
+
+choice=wx.ComboBox(panel2, choices=proj_list, size=(150,20), pos=(500,0))
+def screen_change(self):
+    print("change")
+    frame2.Destroy()
+    frame1.Show()
+choice.Bind(wx.EVT_COMBOBOX,screen_change) 
+
+text_c=wx.StaticText(panel2,label="choose a project", size=(150,20),pos=(350,0))
+
 
 panel=wx.Panel(frame1, size=(750,400),pos=(0,250))
-
-
-
 
 text1=wx.TextCtrl(panel,1000,value="text", size=(150,20))
 text2=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(400,0))
@@ -319,6 +346,7 @@ def OnClickWord(e):
                         return current_word
 html.Bind(wx.html.EVT_HTML_LINK_CLICKED,OnClickWord)
 frame1.Show()  #this and below WERE at bottom
+frame2.Show()
 
 
 app.MainLoop()
