@@ -4,30 +4,41 @@ import PyPDF2
 import os
 from PIL import UnidentifiedImageError
 from pdf2image import convert_from_path
+from pypdf import PdfReader
 
 def test2():
     print("texting in pdf_script")
-def use_pdf(file):
-
+def use_pdf(file, proj_folder):
+    EOF_MARKER= b'%%EOF'
+    print("file="+file)
+    file_name=file.strip(".")[-1]
+    print("file_name"+file_name)
     if os.path.exists("new1.txt"):
          os.remove("new1.txt")
-        
-    file1=open('new1.txt',"a") 
+    with open(file,'rb') as f:
+         contents=f.read()
+   
+    
+
+    file1=proj_folder+'new1.txt'
+    
 
     pdffileobj=open(file,'rb')
 
-    reader=PyPDF2.PdfReader(pdffileobj)
+    reader=PdfReader(pdffileobj)
+    text=""
 
-    num_pages=len(reader.pages)
-    print(str(num_pages)+"nu,")
-    for page in range(num_pages):
-
-         pageobj=reader.pages[page]
-         text=pageobj.extract_text()
-         print(text)
+    for page in reader.pages:
+        text+= page.extract_text() + "\n"
+        
+    print(text)
+    
+    with open(file1,'wb') as f:
+        f.write(text.encode('utf8'))
+   
 
         
-         file1.writelines(text)
+         
 # the functions below are for PDFs which are just images so need converting first
 def create_string(file):
    images = convert_from_path(file) # This returns a list even for a 1 page pdf

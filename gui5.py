@@ -3,6 +3,8 @@ import wx.adv
 import smtplib
 import wx.html
 import json 
+import shutil
+import os
 
 from email.message import EmailMessage
 from translate import *
@@ -26,6 +28,8 @@ for i in range (len(data["projects"])):
     proj_list.append(data["projects"][i]["name"])
 
 print(proj_list)
+langs=["fr","de","ru","uk","ar"]
+use_lang=""
 
 
 
@@ -52,38 +56,20 @@ def checkFreq():
                             print(value.times)
 pronun=None
 word=None
-print("!!!!!FITST !!!!!")
-#usefile="rus_long.pdf"
-#use_pdf(usefile)
-current_word="test"
-file=open("judaism_without_embellishments.txt","r")
-data=file.read()   
-print('length file'+str(len(data)))
-words = data.split()
-print(len(words))
-words_len=len(words)
-pages_list=[]
-print("thousand words"+str(words_len/1000))
-thousands=words_len/1000
-for i in range (int(thousands)):  # change this to change no of words per page
-    use_i=i+1
-    ind=use_i*1000
-    pages_list.append(ind)
-print("pages list now"+str(pages_list))
-max_thous=pages_list[-1] 
-print("last thou"+str(max_thous)) # if here then check when forward button clicked and make it do nothing (ie pass)
+file=None
 
-ten=words[0:1000] # this is extracting words for current page
-twenty=words[1000:2000]
-# print("ten ----- \n"+str(ten))
-page_marker=None
-use_page="1000"
+current_word="test"
+
+#initialise App
 
 app = wx.PySimpleApp()
+
+# create frames
 
 frame1=wx.Frame(None, -1, size=(2000,800))
 frame2=wx.Frame(None, -1, size=(2000,800))
 
+#create loading screen 
 
 bitmap = wx.Bitmap('loading.png')
 splash = wx.adv.SplashScreen(
@@ -94,24 +80,22 @@ splash.Show()
 
 wx.Yield()
 
-
-panel2=wx.Panel(frame2, size=(750,400),pos=(0,600))
-
-choice=wx.ComboBox(panel2, choices=proj_list, size=(150,20), pos=(500,0))
-def screen_change(self):
-    print("change")
-    print(self)
-    use=self.GetEventObject()
-    print(use)
-    exit()
-    frame2.Destroy()
-    frame1.Show()
-choice.Bind(wx.EVT_COMBOBOX,screen_change) 
-
-text_c=wx.StaticText(panel2,label="choose a project", size=(150,20),pos=(350,0))
-
+#Create panels
 
 panel=wx.Panel(frame1, size=(750,400),pos=(0,250))
+panel2=wx.Panel(frame2, size=(750,400),pos=(0,600))
+
+#Create elements
+
+#Panel 2 - Project Screen
+
+text_c=wx.StaticText(panel2,label="choose a project", size=(150,20),pos=(350,0))
+choice=wx.ComboBox(panel2, choices=proj_list, size=(150,20), pos=(500,0))
+btn5=wx.Button(panel2,label="new", size=(100,100), pos=(350,50))
+#proj_name=wx.TextCtrl(panel2,)
+
+
+#Panel 1 - Main App
 
 text1=wx.TextCtrl(panel,1000,value="text", size=(150,20))
 text2=wx.TextCtrl(panel,1000,value="text", size=(150,20), pos=(400,0))
@@ -122,14 +106,77 @@ btn2=wx.Button(panel,id=2,label="next", size=(100,100), pos=(200,0))
 text4=wx.TextCtrl(panel,1000,value="1", size=(150,20), pos=(250,100))
 btn4=wx.Button(panel,label="go", size=(150,20), pos=(0,100))
 control=wx.TextCtrl(frame1, style=wx.TE_MULTILINE, size=(500,500), pos=(1010,0))
-try:
-    f = open("1000.txt", "r")
-    data=f.read()
-    control.SetValue(data)
 
-except:
-    print("failed!")
-    pass
+
+html = wx.html.HtmlWindow(frame1, size=(1000,250))
+
+# Choose text to use 
+
+def main_prog(file1, proj, lang):
+    global use_page
+    global page_marker
+    global max_thous
+    global pages_list
+    global words
+    global use_lang 
+    use_lang=lang
+    print("HERE!")
+    print(file1)
+    with open (file1,"r") as file:
+            data=file.read()
+
+    print('length file'+str(len(data)))
+    words = data.split()
+    print(len(words))
+    words_len=len(words)
+    pages_list=[]
+    print("thousand words"+str(words_len/1000))
+    thousands=words_len/1000
+    for i in range (int(thousands)):  # change this to change no of words per page
+        use_i=i+1
+        ind=use_i*1000
+        pages_list.append(ind)
+    print("pages list now"+str(pages_list))
+    try:
+     max_thous=pages_list[-1] 
+    except:
+     max_thous=1
+    print("last thou"+str(max_thous)) # if here then check when forward button clicked and make it do nothing (ie pass)
+
+    ten=words[0:1000] # this is extracting words for current page
+    twenty=words[1000:2000]
+    # print("ten ----- \n"+str(ten))
+
+    page_marker=None
+    use_page="1000"
+    
+    html.SetStandardFonts(25)
+    html.SetPage(
+
+    "<style>a {text-decoration: none;color: red }</style>" #sorry no css support :/]
+
+
+
+    )
+    for item in ten:
+           html.AppendToPage(
+                "<a href="+item+"> "+item+" </a>"
+                )
+
+
+
+
+    try:
+        f = open("1000.txt", "r")
+        data=f.read()
+        control.SetValue(data)
+
+    except:
+        print("failed!")
+        pass
+
+
+# functions for button clicks/form handling etc.
 
 def OnClickButton(e):
 
@@ -150,7 +197,7 @@ def OnClickButton(e):
             check_text2=str(int(use_page)+1000)
             print("text2 ....")
             print(check_text2)
-            with open(check_text+".txt","w") as file:
+            with open(proj_fol+check_text+".txt","w+") as file:
                 file.write(translation)
             print("translation ....")
             print(translation)
@@ -162,7 +209,7 @@ def OnClickButton(e):
             
             try: 
                 print("check_text2"+check_text2)
-                f = open(check_text2+".txt", "r")
+                f = open(proj_fol+check_text2+".txt", "r")
                 data=f.read()
                 control.SetValue(data)
             except:
@@ -194,7 +241,7 @@ def OnClickButton(e):
                 check_text2=str(int(use_page)-1000)
                 print("text2 ....")
                 print(check_text2)
-                with open(check_text+".txt","w") as file:
+                with open(proj_fol+check_text+".txt","w") as file:
                     file.write(translation)
                 control.SetValue("")
                 html.SetPage("<style>a {text-decoration: none;color: red }</style><body></body>") 
@@ -202,7 +249,7 @@ def OnClickButton(e):
                 page_marker=words[(use_int-2000):(use_int-1000)]
                 try: 
                     print("check_text2"+check_text2)
-                    f = open(check_text2+".txt", "r")
+                    f = open(proj_fol+check_text2+".txt", "r")
                     data=f.read()
                     control.SetValue(data)
                 except:
@@ -226,10 +273,112 @@ def OnClickButton(e):
                
 btn.Bind(wx.EVT_BUTTON,OnClickButton)         
 btn2.Bind(wx.EVT_BUTTON,OnClickButton)
+def new_project(self):
+    with open('projects.json',"r") as file_object:  
+          data = json.load(file_object)  
+    if len(data["projects"])>10:
+        with wx.MessageDialog(panel2,message="cannot have more than 10 projects") as filed:
+            if filed.ShowModal()==wx.ID_OK:
+               pass
+
+    msg=wx.MessageDialog(panel2, message="choose a text to translate",caption="flaflaf", pos=(0,0))
+    msg2=wx.SingleChoiceDialog(panel2, message="select the language to translate from ",caption="language",choices=langs, pos=(0,0))
+    msg3=wx.TextEntryDialog(panel2, message="select a name for your project ",caption="", pos=(0,0))
+    msg4=wx.MessageDialog(panel2, message="error",caption="project already exists", pos=(0,0))
+
+    with msg as filed:
+        if filed.ShowModal()==wx.ID_CANCEL:
+            return
+    use=self.GetEventObject()
+    print(use)
+    with wx.FileDialog(panel2) as filed:
+        if filed.ShowModal()==wx.ID_CANCEL:
+            return
+        pathname=filed.GetPath()
+        print(pathname)
+    with msg2 as filed:
+        if filed.ShowModal()==wx.ID_CANCEL:
+            return
+        project_lang=filed.GetStringSelection()
+    with msg3 as filed:
+        if filed.ShowModal()==wx.ID_CANCEL:
+            return
+        project_name=filed.GetValue()
+        print(project_name)
+        
+        with open('projects.json') as file_object:  
+                       data = json.load(file_object)  
+        print("HEREREEEREER")
+        for i in range (len(data["projects"])):
+                proj=(data["projects"][i]["name"])
+                if project_name==proj:
+                    print("exists")
+                    with msg4 as filed:
+                        if filed.ShowModal()==wx.ID_OK:
+                              return
+        name_use="/"+project_name
+        data["projects"].append({
+            "name":project_name,
+            "folder":name_use,
+            "language":project_lang
+            })
+        with open('projects.json',"w") as file_object: 
+            json.dump(data, file_object, 
+                            indent=4,  
+                            separators=(',',': ')) 
+                
+
+        original=pathname
+        print("original=")
+        print(original)
+        target="projects/"+project_name+"/"
+        if not os.path.exists(target):
+                     os.makedirs(target)
+        file_name = original.split("/")[-1]
+        ext=file_name.split(".")
+        print(ext)
+        if ext != "txt":
+            print("not a text file")
+            use_pdf(original,target)
+            file_name="new1.txt"
+        
+       
+        target2=target+file_name
+        global proj_fol
+        proj_fol=target
+        #shutil.copyfile(original, target2)
+        frame2.Destroy()
+        frame1.Show()
+
+        main_prog(target2,project_name, project_lang)
+
+
+    
+
+
+btn5.Bind(wx.EVT_BUTTON, new_project)
+
+def screen_change(self):
+    print("change")
+    global proj_fol
+    global project
+    global use_page
+    
+    use=self.GetEventObject()
+    print(use)
+    project= use.GetStringSelection()
+    proj_fol=project+"/"
+    if project=="french":
+        frame2.Destroy()
+        frame1.Show()
+        main_prog("projects/"+proj_fol+"judaism_without_embellishments.txt")
+    
+choice.Bind(wx.EVT_COMBOBOX,screen_change) 
 def page_change(e):
    global use_page
    print("clicked!")
    page_no=text4.GetValue()
+   print(pages_list)
    page=(int(page_no)*1000)
    print("page="+str(page))
    if page not in pages_list:
@@ -274,36 +423,6 @@ btn3.Bind(wx.EVT_BUTTON,Store)
 
 
 
-html = wx.html.HtmlWindow(frame1, size=(1000,250))
-html.SetStandardFonts(25)
-
-"""toolbar=wx.ToolBar(self, -1, size=(10,10),pos=(0,150),style=wx.TB_HORIZONTAL | wx.NO_BORDER)
-toolbar.Realize()"""
-
-
-
-
-
-
-#if "gtk2" in wx.PlatformInfo:
-
-
-dog="dppppg"
-cat="fafafaf"
-kitten="glglg"
-start=0
-
-html.SetPage(
-
-"<style>a {text-decoration: none;color: red }</style>" #sorry no css support :/]
-
-
-
-)
-for item in ten:
-       html.AppendToPage(
-            "<a href="+item+"> "+item+" </a>"
-            )
 
 
 
@@ -324,6 +443,7 @@ def OnClickWord(e):
                         global current_word
                         global word
                         global pronun
+                        global use_lang
                         print ("You Clicked:",e.GetLinkInfo().GetHref())
                         print(e.GetLinkInfo())
                         print(e.GetLinkInfo().GetEvent())
@@ -331,7 +451,7 @@ def OnClickWord(e):
                         current_word=useText
                         print(current_word)
                         print("current="+current_word)
-                        word, pronun=trans(current_word)
+                        word, pronun=trans(current_word, use_lang)
                         text1.SetLabel(current_word.strip(","))
                         text2.SetLabel(word.strip(","))
                         text3.SetLabel(pronun.strip(","))
@@ -349,7 +469,7 @@ def OnClickWord(e):
 
                         return current_word
 html.Bind(wx.html.EVT_HTML_LINK_CLICKED,OnClickWord)
-frame1.Show()  #this and below WERE at bottom
+
 frame2.Show()
 
 
