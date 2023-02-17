@@ -119,6 +119,8 @@ def main_prog(file1, proj, lang):
     global pages_list
     global words
     global use_lang 
+    print("in main ...")
+    print("file1:"+file1+"proj:"+proj+"lang"+lang)
     use_lang=lang
     print("HERE!")
     print(file1)
@@ -173,7 +175,7 @@ def main_prog(file1, proj, lang):
 
     except:
         print("failed!")
-        pass
+        
 
 
 # functions for button clicks/form handling etc.
@@ -197,7 +199,8 @@ def OnClickButton(e):
             check_text2=str(int(use_page)+1000)
             print("text2 ....")
             print(check_text2)
-            with open(proj_fol+check_text+".txt","w+") as file:
+            print("proj_fold="+proj_fol)
+            with open(proj_fol+check_text+".txt","w+") as file: #might break here test
                 file.write(translation)
             print("translation ....")
             print(translation)
@@ -249,7 +252,7 @@ def OnClickButton(e):
                 page_marker=words[(use_int-2000):(use_int-1000)]
                 try: 
                     print("check_text2"+check_text2)
-                    f = open(proj_fol+check_text2+".txt", "r")
+                    f = open("projects"+proj_fol+check_text2+".txt", "r")
                     data=f.read()
                     control.SetValue(data)
                 except:
@@ -339,10 +342,54 @@ def new_project(self):
         print(ext)
         if ext != "txt":
             print("not a text file")
-            use_pdf(original,target)
-            file_name="new1.txt"
+            try:
+              create_string(original,target) # swap this with function below once tested
+              print("after create_string")
+              file_name="new1.txt"
+              print("target="+target)
+              img_list=os.listdir(target)
+              print(img_list)
+              img_list2=list(filter(lambda img: not img.endswith('pdf'), img_list))
+              print(len(img_list))
+              print(len(img_list2))
+
+         
+              img_list2.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+              print("pringint IMAGE List --------")
+              print(img_list2)
+
+
+              with open(target+"new1.txt","a")as file:
+                  for item in img_list2:
+                      try:
+                          
+                          data=convert_to_text(target+item,project_lang)
+                         
+                        
+                          file.write(data)
+                       
+                      except Exception as e:
+                              print("FAILED!")
+                            
+                              print(e)
+
+            except Exception as e:
+
+              print("error")
+              print(e)
+              print("EXITING create_string trying use_pdf......")
+              use_pdf(original,target)
+              file_name="new1.txt"
+            """try:
+                use_pdf(original,target)
+                file_name="new1.txt"
+            except Exception as e:
+                print("failed use_pdf")
+                print(e)
+                quit()
+            """
+            
         
-       
         target2=target+file_name
         global proj_fol
         proj_fol=target
@@ -367,12 +414,39 @@ def screen_change(self):
     use=self.GetEventObject()
     print(use)
     project= use.GetStringSelection()
-    proj_fol=project+"/"
-    if project=="french":
-        frame2.Destroy()
-        frame1.Show()
-        main_prog("projects/"+proj_fol+"judaism_without_embellishments.txt")
+    with open('projects.json',"r") as file_object:  
+              data = json.load(file_object)  
     
+    print("HEREREEEREER")
+    for i in range (len(data["projects"])):
+            proj=(data["projects"][i]["name"])
+            print(proj)
+            if project==proj:
+                print(i)
+                use_ind=i
+                print(data["projects"][i])
+                proj_fol="projects/"+data["projects"][i]["folder"]+"/"
+                lang=data["projects"][i]["language"]
+                frame2.Destroy()
+                frame1.Show()
+                main_prog(proj_fol+"new1.txt",proj_fol , lang)
+
+            """if project_name==proj:
+                print("exists")
+                frame2.Destroy()
+                frame1.Show()
+                main_prog("projects/"+proj_fol+"judaism_without_embellishments.txt")"""
+    
+                    
+
+
+
+
+
+
+
+    
+        
 choice.Bind(wx.EVT_COMBOBOX,screen_change) 
 def page_change(e):
    global use_page
@@ -444,6 +518,7 @@ def OnClickWord(e):
                         global word
                         global pronun
                         global use_lang
+                        print("use_lang="+use_lang)
                         print ("You Clicked:",e.GetLinkInfo().GetHref())
                         print(e.GetLinkInfo())
                         print(e.GetLinkInfo().GetEvent())

@@ -2,15 +2,17 @@ from googletrans import Translator
 
 def test():
     print("tested in translate.py")
-def trans(word):
+def trans(word, language):
     
     translator=Translator()
     
     
-    newtrans=translator.translate(word, src="uk", dest="en") 
+    newtrans=translator.translate(word, src=language, dest="en") 
     
     translator2=Translator()
-    orig=translator2.translate(word,src="uk",dest="uk")
+    orig=translator2.translate(word,src=language,dest=language)
+    print(orig)
+    print("pronunciation="+orig.pronunciation)
    
     return newtrans.text, orig.pronunciation
     
