@@ -21,7 +21,7 @@ proj_list=[]
 with open('projects.json',"r") as file_object:  
   data = json.load(file_object)  
 print( data["projects"])
-print(data["projects"][0])
+
 print(len(data["projects"]))
 for i in range (len(data["projects"])):
     print(data["projects"][i]["name"])
@@ -282,7 +282,7 @@ def new_project(self):
     if len(data["projects"])>10:
         with wx.MessageDialog(panel2,message="cannot have more than 10 projects") as filed:
             if filed.ShowModal()==wx.ID_OK:
-               pass
+               return
 
     msg=wx.MessageDialog(panel2, message="choose a text to translate",caption="flaflaf", pos=(0,0))
     msg2=wx.SingleChoiceDialog(panel2, message="select the language to translate from ",caption="language",choices=langs, pos=(0,0))
