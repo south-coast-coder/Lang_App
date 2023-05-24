@@ -252,7 +252,7 @@ def OnClickButton(e):
                 page_marker=words[(use_int-2000):(use_int-1000)]
                 try: 
                     print("check_text2"+check_text2)
-                    f = open("projects"+proj_fol+check_text2+".txt", "r")
+                    f = open(proj_fol+check_text2+".txt", "r")
                     data=f.read()
                     control.SetValue(data)
                 except:
