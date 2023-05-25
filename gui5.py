@@ -169,8 +169,7 @@ def main_prog(file1, proj, lang):
 
 
     try:
-        f = open("1000.txt", "r")
-        data=f.read()
+        f = open(proj_fol+"1000.txt", "r")
         control.SetValue(data)
 
     except:
